@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jax="http://jaxws.sample.camel.prash.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <jax:getCardDetails>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <firstName>prash</firstName>
+            <!--Optional:-->
+            <lastName>meka</lastName>
+            <!--Optional:-->
+            <proxyNumber>400</proxyNumber>
+         </arg0>
+      </jax:getCardDetails>
+   </soapenv:Body>
+</soapenv:Envelope>

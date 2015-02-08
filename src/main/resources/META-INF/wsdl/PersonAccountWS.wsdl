@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PersonAccountWS"
+	targetNamespace="http://jaxws.sample.camel.prash.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://jaxws.sample.camel.prash.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns="http://jaxws.sample.camel.prash.com/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			xmlns:vals="http://values.jaxws.sample.camel.prash.com/"
+			elementFormDefault="unqualified" targetNamespace="http://jaxws.sample.camel.prash.com/">
+			<xs:element name="getCardDetails" type="getCardDetails" />
+			<xs:complexType name="getCardDetails">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="personDetails" type="vals:personDetails" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getCardDetailsResponse" type="getCardDetailsResponse" />
+			<xs:complexType name="getCardDetailsResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="vals:cardDetails" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns="http://values.jaxws.sample.camel.prash.com/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" targetNamespace="http://values.jaxws.sample.camel.prash.com/">
+			<xs:complexType name="personDetails">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="firstName" type="xs:string" />
+					<xs:element minOccurs="0" name="lastName" type="xs:string" />
+					<xs:element minOccurs="0" name="proxyNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="cardDetails">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="cardBalance" type="xs:double" />
+					<xs:element minOccurs="0" name="cardNumber" type="xs:string" />
+					<xs:element minOccurs="0" name="cardStatus" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getCardDetailsResponse">
+		<wsdl:part name="parameters" element="tns:getCardDetailsResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCardDetails">
+		<wsdl:part name="parameters" element="tns:getCardDetails">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="PersonAccountWSPortType">
+		<wsdl:operation name="getCardDetails">
+			<wsdl:input name="getCardDetails" message="tns:getCardDetails">
+			</wsdl:input>
+			<wsdl:output name="getCardDetailsResponse" message="tns:getCardDetailsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PersonAccountWSSoapBinding" type="tns:PersonAccountWSPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getCardDetails">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getCardDetails">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getCardDetailsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PersonAccountWS">
+		<wsdl:port name="PersonAccountWSPort" binding="tns:PersonAccountWSSoapBinding">
+			<soap:address location="http://localhost:9090/PersonAccountWSPort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
